@@ -5,4 +5,4 @@ class Site{
 }
 
 var obj = new Site();
-obj.name();
+obj.name
