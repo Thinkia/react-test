@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>state2-Test</title>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+<div id="example"></div>
+<script type="text/babel">
+
+class  Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { date: new Date()};
+    }
+
+    // 渲染到dom中运行
+    componentDidMount(){
+        this.timerID = setInterval(()=>this.tick(),1000)
+    }
+
+    // 清除计时器
+    componentWillUnmount(){
+        clearInterval(this.timerID)
+    }
+
+    tick(){
+        this.setState({
+            date: new Date()
+        });
+    }
+
+    render(){
+        return (
+            <div>
+                <h1>hello, state2</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>    
+        );
+    }
+}
+
+ReactDOM.render(
+    <Clock/>,
+    document.getElementById('example')
+);
+
+</script>
+
+</body>
+</html>
