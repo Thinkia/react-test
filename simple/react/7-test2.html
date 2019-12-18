@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>条件渲染2</title>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+<div id="example"></div>
+<script type="text/babel">
+
+class LoginControl extends React.Component{
+        constructor(props) {
+            super(props);
+            this.handleLoginClick = this.handleLoginClick.bind(this)
+            this.handleLogoutClick = this.handleLogoutClick.bind(this)
+            this.state = {isLoggedIn: false}
+        }
+
+        handleLoginClick() {
+            this.setState({isLoggedIn : !this.state.isLoggedIn})
+            
+        }
+
+        handleLogoutClick() {
+            this.setState({isLoggedIn: !this.state.isLoggedIn});
+        }
+
+
+        render() {
+            let isLoggedIn = this.state.isLoggedIn;
+            let button;
+
+            if(isLoggedIn) {
+                button = <LogoutButton onClick = {this.handleLogoutClick} />
+            } else {
+                button = <LoginButton onClick = {this.handleLoginClick} />
+            }
+
+            return (
+                <div>
+                    <Greeting isLoggedIn = {isLoggedIn} />
+                    {button}
+                </div>
+            )
+
+        }
+}
+
+     let UserGreeting = (props) =>{
+         return <h1> Welcome back!</h1>
+     }
+    
+     let GuestGreeting = (props) => {
+         return <h1>Please sign up.</h1>
+     }
+    
+     let Greeting = (props) =>{
+         let isLoggedIn = props.isLoggedIn;
+         if(isLoggedIn) {
+             return <UserGreeting/>
+         } else {
+             return <GuestGreeting />
+         }
+     }
+    
+     let LoginButton = (props)=> {
+         return (
+             <button onCLick = {props.onClick}>Login </button>
+         )
+     }
+    
+     let LogoutButton = (props)=> {
+         return (
+             <button onClick = {props.onClick}>logOut</button>
+         )
+     }
+    
+     ReactDOM.render(
+                 <LoginControl />,
+                 document.getElementById('example')
+             )
+    
+</script>
+
+</body>
+</html>

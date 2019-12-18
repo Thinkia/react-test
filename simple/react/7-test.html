@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>state2-Test</title>
+<title>条件渲染</title>
 <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 
@@ -13,27 +13,30 @@
 <div id="example"></div>
 <script type="text/babel">
 
-class  Clock extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { date: new Date()};
-    }
+  
+let UserGreeting = (props) =>{
+    return <h1> Welcome back!</h1>
+}
 
-    render(){
-        return (
-            <div>
-                <h1>hello, state2</h1>
-                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-            </div>    
-        );
+let GuestGreeting = (props) => {
+    return <h1>Please sign up.</h1>
+}
+
+let Greeting = (props) =>{
+    let isLoggedIn = props.isLoggedIn;
+    if(isLoggedIn) {
+        return <UserGreeting/>
+    } else {
+        return <GuestGreeting />
     }
 }
 
 ReactDOM.render(
-    <Clock/>,
+    <Greeting isLoggedIn = {Math.random() > 0.5? true:false} />,
     document.getElementById('example')
-);
+)
 
+  
 </script>
 
 </body>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>条件渲染</title>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+<div id="example"></div>
+<script type="text/babel">
+
+let Mailbox = (props) => {
+    const unreadMessages = props.unreadMessages;
+    let messages = '';
+    for(let i=0;i<unreadMessages.length;i++) {
+        messages += `${i+1} --${unreadMessages[i]}`
+    }
+    return (
+        <div> 
+            <h1>Hello </h1>    
+            { unreadMessages.length > 0 && <h2> You have {unreadMessages.length} unread messages : </h2>}
+            <h2>{messages }</h2>
+        </div>
+    )
+}
+
+let messages = ['React', 'Re:React','test'];
+
+ReactDOM.render(
+    <Mailbox unreadMessages = {messages} />,
+    document.getElementById('example')
+)
+  
+</script>
+
+</body>
+</html>
